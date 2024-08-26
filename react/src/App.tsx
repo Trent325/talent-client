@@ -8,8 +8,6 @@ import Dashboard from './components/Dashboard'
 
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <BrowserRouter>
