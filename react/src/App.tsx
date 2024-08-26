@@ -8,6 +8,7 @@ import Dashboard from './components/Dashboard'
 import Login from './components/Auth/Login'
 import Register from './components/Auth/Register'
 import PostJob from './components/Job/PostJob'
+import JobDetails from './components/Job/JobDetails'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -20,7 +21,8 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/Postjob" element={<PostJob />} />
+            <Route path="/postjob" element={<PostJob />} />
+            <Route path="/jobdetails" element={<JobDetails />} />
           </Routes>
         </BrowserRouter>
       </LocalizationProvider>
