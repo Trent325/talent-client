@@ -102,11 +102,11 @@ function NavBar() {
                     }}>
                       <Typography textAlign="center">Accepted</Typography>
                     </MenuItem>
-                    <MenuItem key={'JobHiring'} onClick={() => {
+                    <MenuItem key={'JobsHiring'} onClick={() => {
                       handleCloseNavMenu();
-                      navigate("/jobhiring");
+                      navigate("/jobshiring");
                     }}>
-                      <Typography textAlign="center">Job Hiring</Typography>
+                      <Typography textAlign="center">Jobs Hiring</Typography>
                     </MenuItem>
                     <MenuItem key={'Profile'} onClick={() => {
                       handleCloseNavMenu();
@@ -121,17 +121,17 @@ function NavBar() {
                     </MenuItem>
                   </>) :
                   (<>
-                    <MenuItem key={'JobOffers'} onClick={() => {
+                    <MenuItem key={'Jobs'} onClick={() => {
                       handleCloseNavMenu();
-                      navigate("/joboffers");
+                      navigate("/jobs");
                     }}>
-                      <Typography textAlign="center">Job Offers</Typography>
+                      <Typography textAlign="center">Jobs</Typography>
                     </MenuItem>
-                    <MenuItem key={'JobApplied'} onClick={() => {
+                    <MenuItem key={'JobsApplied'} onClick={() => {
                       handleCloseNavMenu();
-                      navigate("/jobapplied");
+                      navigate("/jobsapplied");
                     }}>
-                      <Typography textAlign="center">Job Applied</Typography>
+                      <Typography textAlign="center">Jobs Applied</Typography>
                     </MenuItem>
                     <MenuItem key={'Profile'} onClick={() => {
                       handleCloseNavMenu();
@@ -206,13 +206,13 @@ function NavBar() {
                     Accepted
                   </Button>
                   <Button
-                    key={'jobhiring'}
+                    key={'jobshiring'}
                     onClick={() => {
-                      navigate("/jobhiring");
+                      navigate("/jobshiring");
                     }}
                     sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
                   >
-                    Job Hiring
+                    Jobs Hiring
                   </Button>
                   <Button
                     key={'profile'}
@@ -236,22 +236,22 @@ function NavBar() {
                 (<>
 
                   <Button
-                    key={'joboffers'}
+                    key={'jobs'}
                     onClick={() => {
-                      navigate("/joboffers");
+                      navigate("/jobs");
                     }}
                     sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
                   >
-                    Job Offers
+                    Jobs
                   </Button>
                   <Button
-                    key={'jobapplied'}
+                    key={'jobsapplied'}
                     onClick={() => {
-                      navigate("/jobapplied");
+                      navigate("/jobsapplied");
                     }}
                     sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
                   >
-                    Job Applied
+                    Jobs Applied
                   </Button>
                   <Button
                     key={'profile'}
