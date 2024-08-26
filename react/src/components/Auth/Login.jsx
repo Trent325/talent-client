@@ -39,7 +39,6 @@ const Login = () => {
       <section className="authPage">
         <div className="container">
           <div className="header">
-            <img src="/JobZeelogo.png" alt="logo" />
             <h3>Login to your account</h3>
           </div>
           <form>
@@ -50,6 +49,7 @@ const Login = () => {
                   <option value="">Select Role</option>
                   <option value="Employer">Employer</option>
                   <option value="Job Seeker">Job Seeker</option>
+                  <option value="Admin">Admin</option>
                 </select>
                 <FaRegUser />
               </div>
@@ -59,7 +59,7 @@ const Login = () => {
               <div>
                 <input
                   type="email"
-                  placeholder="zk@gmail.com"
+                  placeholder="Your Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -85,7 +85,6 @@ const Login = () => {
           </form>
         </div>
         <div className="banner">
-          <img src="/login.png" alt="login" />
         </div>
       </section>
     </>
