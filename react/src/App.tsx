@@ -12,7 +12,7 @@ import Jobs from './components/Applicant/Jobs';
 import JobsApplied from './components/Applicant/JobsApplied';
 import Accepted from './components/HR/Accepted';
 import JobsHiring from './components/HR/JobsHiring';
-
+import JobDetails from './components/Job/JobDetails'
 
 function App() {
 
@@ -29,6 +29,7 @@ function App() {
             <Route path="/jobsapplied" element={<JobsApplied />} />
             <Route path="/jobs" element={<Jobs />} />
             <Route path="/Postjob" element={<PostJob />} />
+            <Route path="/jobdetails" element={<JobDetails />} />
           </Routes>
         </BrowserRouter>
       </LocalizationProvider>
