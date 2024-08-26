@@ -10,8 +10,6 @@ import Register from './components/Auth/Register'
 
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <BrowserRouter>
