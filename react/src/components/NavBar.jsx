@@ -80,14 +80,14 @@ function NavBar() {
             >
                 <MenuItem key={'Login'} onClick={() => {
                     handleCloseNavMenu();
-                    navigate("/");
+                    navigate("/login");
                     
                 }}>
                     <Typography textAlign="center">Login</Typography>
                 </MenuItem>
                 <MenuItem key={'Sign-up'} onClick={() => {
                     handleCloseNavMenu();
-                    navigate("/signup");
+                    navigate("/register");
                 }}>
                     <Typography textAlign="center">Sign-up</Typography>
                 </MenuItem>
@@ -135,7 +135,7 @@ function NavBar() {
             <Button
                 key={'Login'}
                 onClick={() => {
-                    navigate("/");
+                    navigate("/login");
                 }}
                 sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
             >
@@ -144,7 +144,7 @@ function NavBar() {
             <Button
                 key={'Sign-up'}
                 onClick={() => {
-                    navigate("/signup");
+                    navigate("/register");
                 }}
                 sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
             >
