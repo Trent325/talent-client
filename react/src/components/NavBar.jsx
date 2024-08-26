@@ -78,36 +78,36 @@ function NavBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-                {!currentUser && <MenuItem key={'Login'} onClick={() => {
+                <MenuItem key={'Login'} onClick={() => {
                     handleCloseNavMenu();
                     navigate("/");
                     
                 }}>
                     <Typography textAlign="center">Login</Typography>
-                </MenuItem>}
-                {!currentUser && <MenuItem key={'Sign-up'} onClick={() => {
+                </MenuItem>
+                <MenuItem key={'Sign-up'} onClick={() => {
                     handleCloseNavMenu();
                     navigate("/signup");
                 }}>
                     <Typography textAlign="center">Sign-up</Typography>
-                </MenuItem>}
-                {currentUser && <MenuItem key={'Events'} onClick={() => {
+                </MenuItem>
+                <MenuItem key={'Events'} onClick={() => {
                     handleCloseNavMenu();
                     navigate("/events");
                 }}>
                     <Typography textAlign="center">Events</Typography>
-                </MenuItem>}
-                {currentUser && <MenuItem key={'About Us'} onClick={() => {
+                </MenuItem>
+                <MenuItem key={'About Us'} onClick={() => {
                     handleCloseNavMenu();
                     navigate("/About Us");
                 }}>
                     <Typography textAlign="center">About Us</Typography>
-                </MenuItem>}
-                {currentUser && <MenuItem key={'Logout'} onClick={() => {
+                </MenuItem>
+                <MenuItem key={'Logout'} onClick={() => {
                     handleLogout();
                 }}>
                     <Typography textAlign="center">Logout</Typography>
-                </MenuItem>}
+                </MenuItem>
             </Menu>
           </Box>
 
@@ -132,7 +132,7 @@ function NavBar() {
 
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center', marginRight: '40px'}}>
-            {!currentUser && <Button
+            <Button
                 key={'Login'}
                 onClick={() => {
                     navigate("/");
@@ -140,8 +140,8 @@ function NavBar() {
                 sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
             >
                 Login
-            </Button>}
-            {!currentUser && <Button
+            </Button>
+            <Button
                 key={'Sign-up'}
                 onClick={() => {
                     navigate("/signup");
@@ -149,8 +149,8 @@ function NavBar() {
                 sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
             >
                 Sign-up
-            </Button>}
-            {currentUser && <Button
+            </Button>
+            <Button
                 key={'Events'}
                 onClick={() => {
                     navigate("/events");
@@ -158,8 +158,8 @@ function NavBar() {
                 sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
             >
                 Events
-            </Button>}
-            {currentUser && <Button
+            </Button>
+            <Button
                 key={'About Us'}
                 onClick={() => {
                     navigate("/events");
@@ -167,8 +167,8 @@ function NavBar() {
                 sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
             >
                 About Us
-            </Button>}
-            {currentUser && <Button
+            </Button>
+            <Button
                 key={'Logout'}
                 onClick={() => {
                   handleLogout();
@@ -176,7 +176,7 @@ function NavBar() {
                 sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
             >
                 Logout
-            </Button>}
+            </Button>
           </Box>
         </Toolbar>
       </Container>
