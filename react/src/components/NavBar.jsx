@@ -14,7 +14,8 @@ import { useNavigate } from 'react-router-dom';
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navigate = useNavigate();
-
+  const currentuser = { isAdmin: false, isHR: false }
+  console.log('*****************',Object.keys(currentuser).length)
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -22,10 +23,6 @@ function NavBar() {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
-  const handleLogout = async () => {
-    await doSignOut();
-  } 
 
   return (
     <AppBar position="static">
@@ -78,36 +75,77 @@ function NavBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-                <MenuItem key={'Login'} onClick={() => {
-                    handleCloseNavMenu();
-                    navigate("/");
-                    
-                }}>
-                    <Typography textAlign="center">Login</Typography>
-                </MenuItem>
-                <MenuItem key={'Sign-up'} onClick={() => {
-                    handleCloseNavMenu();
-                    navigate("/signup");
-                }}>
-                    <Typography textAlign="center">Sign-up</Typography>
-                </MenuItem>
-                <MenuItem key={'Events'} onClick={() => {
-                    handleCloseNavMenu();
-                    navigate("/events");
-                }}>
-                    <Typography textAlign="center">Events</Typography>
-                </MenuItem>
-                <MenuItem key={'About Us'} onClick={() => {
-                    handleCloseNavMenu();
-                    navigate("/About Us");
-                }}>
-                    <Typography textAlign="center">About Us</Typography>
-                </MenuItem>
-                <MenuItem key={'Logout'} onClick={() => {
-                    handleLogout();
-                }}>
-                    <Typography textAlign="center">Logout</Typography>
-                </MenuItem>
+              {Object.keys(currentuser).length == 0 ?
+                (
+                  <>
+                    <MenuItem key={'Login'} onClick={() => {
+                      handleCloseNavMenu();
+                      navigate("/login");
+
+                    }}>
+                      <Typography textAlign="center">Login</Typography>
+                    </MenuItem>
+                    <MenuItem key={'Sign-up'} onClick={() => {
+                      handleCloseNavMenu();
+                      navigate("/signup");
+                    }}>
+                      <Typography textAlign="center">Sign-up</Typography>
+                    </MenuItem>
+                  </>
+                )
+                :
+                currentuser.isHR ?
+                  (<>
+                    <MenuItem key={'Accepted'} onClick={() => {
+                      handleCloseNavMenu();
+                      navigate("/accepted");
+                    }}>
+                      <Typography textAlign="center">Accepted</Typography>
+                    </MenuItem>
+                    <MenuItem key={'JobHiring'} onClick={() => {
+                      handleCloseNavMenu();
+                      navigate("/jobhiring");
+                    }}>
+                      <Typography textAlign="center">Job Hiring</Typography>
+                    </MenuItem>
+                    <MenuItem key={'Profile'} onClick={() => {
+                      handleCloseNavMenu();
+                      navigate("/profile");
+                    }}>
+                      <Typography textAlign="center">Profile</Typography>
+                    </MenuItem>
+                    <MenuItem key={'Logout'} onClick={() => {
+                      handleLogout();
+                    }}>
+                      <Typography textAlign="center">Logout</Typography>
+                    </MenuItem>
+                  </>) :
+                  (<>
+                    <MenuItem key={'JobOffers'} onClick={() => {
+                      handleCloseNavMenu();
+                      navigate("/joboffers");
+                    }}>
+                      <Typography textAlign="center">Job Offers</Typography>
+                    </MenuItem>
+                    <MenuItem key={'JobApplied'} onClick={() => {
+                      handleCloseNavMenu();
+                      navigate("/jobapplied");
+                    }}>
+                      <Typography textAlign="center">Job Applied</Typography>
+                    </MenuItem>
+                    <MenuItem key={'Profile'} onClick={() => {
+                      handleCloseNavMenu();
+                      navigate("/profile");
+                    }}>
+                      <Typography textAlign="center">Profile</Typography>
+                    </MenuItem>
+                    <MenuItem key={'Logout'} onClick={() => {
+                      handleLogout();
+                    }}>
+                      <Typography textAlign="center">Logout</Typography>
+                    </MenuItem>
+                  </>)
+              }
             </Menu>
           </Box>
 
@@ -130,57 +168,115 @@ function NavBar() {
             ADP
           </Typography>
 
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center', marginRight: '40px' }}>
+            {Object.keys(currentuser).length == 0 
+              ?
+              (<>
+                <Button
+                  key={'Login'}
+                  onClick={() => {
+                    navigate("/login");
+                  }}
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center', marginRight: '40px'}}>
-            <Button
-                key={'Login'}
-                onClick={() => {
-                    navigate("/");
-                }}
-                sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
-            >
-                Login
-            </Button>
-            <Button
-                key={'Sign-up'}
-                onClick={() => {
-                    navigate("/signup");
-                }}
-                sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
-            >
-                Sign-up
-            </Button>
-            <Button
-                key={'Events'}
-                onClick={() => {
-                    navigate("/events");
-                }}
-                sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
-            >
-                Events
-            </Button>
-            <Button
-                key={'About Us'}
-                onClick={() => {
-                    navigate("/events");
-                }}
-                sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
-            >
-                About Us
-            </Button>
-            <Button
-                key={'Logout'}
-                onClick={() => {
-                  handleLogout();
-                }}
-                sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
-            >
-                Logout
-            </Button>
+                  sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
+                >
+                  Login
+                </Button>
+                <Button
+                  key={'Register'}
+                  onClick={() => {
+                    navigate("/register");
+                  }}
+                  sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
+                >
+                  Sign-up
+                </Button>
+              </>) :
+              currentuser.isHR
+                ?
+                (<>
+
+                  <Button
+                    key={'accepted'}
+                    onClick={() => {
+                      navigate("/accepted");
+                    }}
+                    sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
+                  >
+                    Accepted
+                  </Button>
+                  <Button
+                    key={'jobhiring'}
+                    onClick={() => {
+                      navigate("/jobhiring");
+                    }}
+                    sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
+                  >
+                    Job Hiring
+                  </Button>
+                  <Button
+                    key={'profile'}
+                    onClick={() => {
+                      navigate("/profile");
+                    }}
+                    sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
+                  >
+                    Profile
+                  </Button>
+                  <Button
+                    key={'Logout'}
+                    onClick={() => {
+                      handleLogout();
+                    }}
+                    sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
+                  >
+                    Logout
+                  </Button>
+                </>) :
+                (<>
+
+                  <Button
+                    key={'joboffers'}
+                    onClick={() => {
+                      navigate("/joboffers");
+                    }}
+                    sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
+                  >
+                    Job Offers
+                  </Button>
+                  <Button
+                    key={'jobapplied'}
+                    onClick={() => {
+                      navigate("/jobapplied");
+                    }}
+                    sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
+                  >
+                    Job Applied
+                  </Button>
+                  <Button
+                    key={'profile'}
+                    onClick={() => {
+                      navigate("/profile");
+                    }}
+                    sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
+                  >
+                    Profile
+                  </Button>
+                  <Button
+                    key={'Logout'}
+                    onClick={() => {
+                      handleLogout();
+                    }}
+                    sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, marginLeft: '10px', marginRight: '10px' }}
+                  >
+                    Logout
+                  </Button>
+                </>)}
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
 }
+
 export default NavBar;
