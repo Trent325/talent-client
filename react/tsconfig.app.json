@@ -20,5 +20,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": ["src", "../../../ref rpoject/MERN-Stack-Job-Seeking-Web-Application/frontend/src/components/Job"]
 }
