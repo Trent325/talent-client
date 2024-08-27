@@ -1,49 +1,54 @@
-import React, { useState } from 'react';
-import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/auth';
+import React, { useState } from "react";
+import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/auth";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [role, setRole] = useState('applicant');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [roles, setRoles] = useState("applicant");
   const navigate = useNavigate();
-  const { setToken } = useAuth();
+  const { setToken, setRole } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setError('');
-
+    setError("");
+  
     try {
-      const response = await fetch('http://localhost:3000/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: email, password, role }),
+      console.log(roles);
+      const response = await fetch("http://localhost:3000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: email, password, role: roles }),
       });
-
+  
       if (!response.ok) {
         const data = await response.json();
-        setError(data.message || 'Login failed');
+        setError(data.message || "Login failed");
         return;
       }
-
+  
+      // Parse the response JSON
       const data = await response.json();
-      console.log(data);
-      setToken(data.token);
-
-      if (data.role === "hiringManger") {
-        navigate('/admin-dashboard'); // Redirect to admin dashboard
+      const { token, role } = data;
+  
+      setToken(token);
+      setRole(role);
+  
+      // Redirect based on role
+      if (role === "hiringManager") {
+        navigate("/admin-dashboard"); // Redirect to admin dashboard
       } else {
-        navigate('/jobList'); // Redirect to user dashboard
+        navigate("/jobList"); // Redirect to user dashboard
       }
     } catch (error) {
-      setError('An error occurred');
+      setError("An error occurred");
     }
   };
 
   return (
-    <Container className='bg-white'>
+    <Container className="bg-white">
       <Row className="justify-content-md-center">
         <Col md={6}>
           <h2 className="text-center my-4">Login</h2>
@@ -80,8 +85,8 @@ const Login = () => {
                   label="Applicant"
                   name="role"
                   value="applicant"
-                  checked={role === 'applicant'}
-                  onChange={(e) => setRole(e.target.value)}
+                  checked={roles === "applicant"}
+                  onChange={(e) => setRoles(e.target.value)}
                   className="mx-2"
                 />
                 <Form.Check
@@ -90,8 +95,18 @@ const Login = () => {
                   label="Hiring Manager"
                   name="role"
                   value="hiringManager"
-                  checked={role === 'hiringManager'}
-                  onChange={(e) => setRole(e.target.value)}
+                  checked={roles === "hiringManager"}
+                  onChange={(e) => setRoles(e.target.value)}
+                  className="mx-2"
+                />
+                <Form.Check
+                  type="radio"
+                  id="roleAdmin"
+                  label="Admin"
+                  name="Admin"
+                  value="admin"
+                  checked={roles === "admin"}
+                  onChange={(e) => setRoles(e.target.value)}
                   className="mx-2"
                 />
               </div>

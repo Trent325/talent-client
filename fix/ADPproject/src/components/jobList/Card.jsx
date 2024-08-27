@@ -43,7 +43,13 @@ const JobCard = ({ job }) => {
               Category: {job.category}
             </Typography>
             <Typography variant="body1" gutterBottom>
-              Date: {job.jobPostedOn}
+              Location: {job.location}
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              Date: {job.postDate}
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              Salary: {job.salary}
             </Typography>
           </Link>
         </CardContent>

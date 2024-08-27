@@ -16,6 +16,8 @@ const Jobs = () => {
     return <h1>Error: {error.message}</h1>;
   }
 
+  console.log(jobsData);
+
   return (
     <>
       <div className="mt-3" style={{ display: 'flex', justifyContent: 'center' }}>
