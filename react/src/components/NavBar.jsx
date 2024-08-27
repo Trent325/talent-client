@@ -14,8 +14,7 @@ import { useNavigate } from 'react-router-dom';
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navigate = useNavigate();
-  const currentuser = { isAdmin: false, isHR: false }
-  console.log('*****************',Object.keys(currentuser).length)
+  const currentuser = { isAdmin: false, isHR: true }
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
