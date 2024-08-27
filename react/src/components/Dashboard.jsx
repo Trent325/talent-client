@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Dashboard = () => {
-    const currentuser = { isAdmin: false, isHR: false };
+    const currentuser = { isAdmin: false, isHR: true };
     const navigate = useNavigate();
 
 

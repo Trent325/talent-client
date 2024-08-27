@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -12,7 +12,7 @@ import Jobs from './components/Applicant/Jobs';
 import JobsApplied from './components/Applicant/JobsApplied';
 import Accepted from './components/HR/Accepted';
 import JobsHiring from './components/HR/JobsHiring';
-import JobDetails from './components/HR/JobDetails'
+import JobDetails from './components/JobDetails';
 
 function App() {
 
@@ -28,8 +28,8 @@ function App() {
             <Route path="/accepted" element={<Accepted />} />
             <Route path="/jobsapplied" element={<JobsApplied />} />
             <Route path="/jobs" element={<Jobs />} />
-            <Route path="/Postjob" element={<PostJob />} />
-            <Route path="/jobdetails" element={<JobDetails />} />
+            <Route path="/postjob" element={<PostJob />} />
+            <Route path="/jobdetails/:id" element={<JobDetails />} />
           </Routes>
         </BrowserRouter>
       </LocalizationProvider>
