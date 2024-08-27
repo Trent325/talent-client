@@ -13,6 +13,7 @@ import JobsApplied from './components/Applicant/JobsApplied';
 import Accepted from './components/HR/Accepted';
 import JobsHiring from './components/HR/JobsHiring';
 import JobDetails from './components/JobDetails';
+import UserProfile from './components/Applicant/Profile';
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
             <Route path="/jobs" element={<Jobs />} />
             <Route path="/postjob" element={<PostJob />} />
             <Route path="/jobdetails/:id" element={<JobDetails />} />
+            <Route path="/userprofile" element={<UserProfile />} />
           </Routes>
         </BrowserRouter>
       </LocalizationProvider>
