@@ -19,6 +19,12 @@ const JobsHiring = () => {
   let card = null;
   const [relode, setRelode] = useState(true);
   const navigate = useNavigate();
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+
+  const formattedDate = `${year}.${month}.${day}`;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -124,7 +130,7 @@ const JobsHiring = () => {
                     category: "",
                     location: "",
                     expectedSalary: "",
-                    jobPostedOn: "",
+                    jobPostedOn: formattedDate,
                     description: ""
                 },
               });
