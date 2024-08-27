@@ -76,7 +76,7 @@ function NavBar() {
             >
               {Object.keys(currentuser).length == 0 ?
                 (
-                  <>
+                  <Box>
                     <MenuItem key={'Login'} onClick={() => {
                       handleCloseNavMenu();
                       navigate("/login");
@@ -90,11 +90,11 @@ function NavBar() {
                     }}>
                       <Typography textAlign="center">Sign-up</Typography>
                     </MenuItem>
-                  </>
+                  </Box>
                 )
                 :
                 currentuser.isHR ?
-                  (<>
+                  (<Box>
                     <MenuItem key={'Accepted'} onClick={() => {
                       handleCloseNavMenu();
                       navigate("/accepted");
@@ -118,8 +118,8 @@ function NavBar() {
                     }}>
                       <Typography textAlign="center">Logout</Typography>
                     </MenuItem>
-                  </>) :
-                  (<>
+                  </Box>) :
+                  (<Box>
                     <MenuItem key={'Jobs'} onClick={() => {
                       handleCloseNavMenu();
                       navigate("/jobs");
@@ -143,7 +143,7 @@ function NavBar() {
                     }}>
                       <Typography textAlign="center">Logout</Typography>
                     </MenuItem>
-                  </>)
+                  </Box>)
               }
             </Menu>
           </Box>
