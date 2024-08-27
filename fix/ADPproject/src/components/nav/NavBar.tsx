@@ -12,8 +12,8 @@ const AppNavbar: React.FC = () => {
     setToken(null);
     setRole(null);
 
-  // Redirect to the home or login page
-  navigate("/"); 
+    // Redirect to the home or login page
+    navigate("/");
   };
 
   return (
@@ -31,15 +31,18 @@ const AppNavbar: React.FC = () => {
                 <Nav.Link as={Link} to="/profile">
                   Profile
                 </Nav.Link>
-                <Nav.Link as={Link} to="/jobList">
-                  Job List
-                </Nav.Link>
+
+                {role === "applicant" && (
+                  <Nav.Link as={Link} to="/jobList">
+                    Job List
+                  </Nav.Link>
+                )}
 
                 {/* Conditional links based on user role */}
                 {role === "hiringManager" && (
                   <>
-                    <Nav.Link as={Link} to="/admin-dashboard">
-                      Admin Dashboard
+                    <Nav.Link as={Link} to="/hiringManager">
+                      Your Jobs
                     </Nav.Link>
                     {/* Add more admin-specific links if needed */}
                   </>

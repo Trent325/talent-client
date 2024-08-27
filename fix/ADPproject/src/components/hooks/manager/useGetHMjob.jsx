@@ -1,7 +1,6 @@
-import { useAuth } from '../context/auth';
+import { useAuth } from '../../context/auth';
 import axios from 'axios';
 import { useQuery } from 'react-query';
-import * as jwtDecode from 'jwt-decode';
 
 function parseJwt (token) {
     let base64Url = token.split('.')[1];
