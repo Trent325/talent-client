@@ -88,15 +88,21 @@ const JobDetails = () => {
           >
             {currentuser.isHR ? (
               <>
-                <Button variant="contained" onClick={() => {
-                  navigate("/postjob", { state: {                     
-                    title: job.title,
-                    category: job.category,
-                    location: job.location,
-                    expectedSalary: job.expectedSalary,
-                    jobPostedOn: job.jobPostedOn,
-                    description: job.description} });
-                }}>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    navigate("/postjob", {
+                      state: {
+                        title: job.title,
+                        category: job.category,
+                        location: job.location,
+                        expectedSalary: job.expectedSalary,
+                        jobPostedOn: job.jobPostedOn,
+                        description: job.description,
+                      },
+                    });
+                  }}
+                >
                   Update
                 </Button>
               </>
