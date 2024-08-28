@@ -117,9 +117,7 @@
   .user-profile-page {
     display: flex;
     justify-content: center;
-    align-items: center;
     height: 100vh;
-    background-color: #f0f4f8;
   }
   
   .profile-card {
@@ -130,6 +128,12 @@
     width: 100%;
     max-width: 500px;
     transition: all 0.3s ease-in-out;
+  }
+
+  .profiledetails{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
   }
   
   .profile-card:hover {
@@ -228,4 +232,11 @@
   .detail ul {
     list-style-type: disc;
     padding-left: 20px;
+  }
+
+  .makeCenter {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
   }
