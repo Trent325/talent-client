@@ -7,6 +7,7 @@ import Register from "../auth/Register";
 import JobListpage from "../pages/JobListApplicant";
 import AuthRoute from "../context/route";
 import Manager from "../pages/JobListHiring";
+import JobDetails from "../pages/JobDetails";
 
 const RouterApp = () => {
   return (
@@ -18,6 +19,7 @@ const RouterApp = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/jobList" element={<AuthRoute element={JobListpage} />} />
         <Route path="/hiringManager" element={<AuthRoute element={Manager} />} />
+        <Route path="/jobdetails/:jobId" element={<AuthRoute element={JobDetails} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
