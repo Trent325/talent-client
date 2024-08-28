@@ -38,7 +38,7 @@ const Login = () => {
   
       // Redirect based on role
       if (role === "hiringManager") {
-        navigate("/admin-dashboard"); // Redirect to admin dashboard
+        navigate("/hiringManager"); // Redirect to admin dashboard
       } else {
         navigate("/jobList"); // Redirect to user dashboard
       }
