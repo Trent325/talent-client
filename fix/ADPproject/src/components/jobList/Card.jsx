@@ -38,7 +38,7 @@ const JobCard = ({ job }) => {
           <div onClick={() => navigate(`/jobdetails/${job._id}`, { state: job })}
             style={{ textDecoration: 'none', cursor: 'pointer' }}>
             <Typography variant="h5" component="h1" gutterBottom>
-              Title: {job.title}
+              {job.title}
             </Typography>
             <Typography variant="body1" gutterBottom>
               Category: {job.category}
