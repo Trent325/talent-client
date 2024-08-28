@@ -33,5 +33,10 @@ export const usePostJob = () => {
     return response.data;
   };
 
-  return useMutation(postJob);
+  return useMutation(postJob, {
+    onSuccess: () => {
+      // Invalidate and refetch jobs query after posting a job
+      queryClient.invalidateQueries('jobs');
+    },
+  });
 };

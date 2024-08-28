@@ -37,7 +37,7 @@ const JobCard = ({ job }) => {
             style={{ textDecoration: 'none' }}
           >
             <Typography variant="h5" component="h1" gutterBottom>
-              Title: {job.title}
+              {job.title}
             </Typography>
             <Typography variant="body1" gutterBottom>
               Category: {job.category}

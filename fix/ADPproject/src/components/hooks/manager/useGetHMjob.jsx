@@ -17,15 +17,13 @@ function parseJwt (token) {
     const decodedToken = parseJwt(token);
     const userId = decodedToken.id; // Assuming the ID is stored in the "id" field
   
-    console.log(userId);
+    console.log(token); // This will help debug if the token is being passed correctly
   
-    // Make the request and include the user ID in the body
-    const response = await axios.get('http://localhost:3000/api/manager/jobs', {
+    // Make the POST request and include the user ID in the body
+    const response = await axios.get(`http://localhost:3000/api/manager/jobs?userId=${userId}`, {
       headers: {
         'Authorization': `Bearer ${token}`, // Include token in the header
-      },
-      params: {
-        userId, // Attach the user ID as a query parameter
+        'Content-Type': 'application/json',
       },
     });
   

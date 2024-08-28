@@ -1,9 +1,31 @@
-import React from 'react';
-import { Card, CardContent, Grid, Typography, CardMedia } from '@mui/material';
+import React, { useState } from 'react';
+import { Card, CardContent, Grid, Typography, CardMedia, IconButton, Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from 'react-router-dom';
 import noImage from '../../assets/noimage.jpg';
+import { useDeleteJob } from '../hooks/manager/useDeleteJob';
 
 const JobCard = ({ job }) => {
+  const [open, setOpen] = useState(false);
+  const { mutate: deleteJob } = useDeleteJob();
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleDelete = async () => {
+    try {
+      await deleteJob(job._id);
+      handleClose(); // Close the modal after deletion
+    } catch (error) {
+      console.error('Failed to delete job:', error);
+    }
+  };
+
   return (
     <Grid item xs={10} sm={10} md={10} lg={10} xl={10} key={job._id}>
       <Card
@@ -37,7 +59,7 @@ const JobCard = ({ job }) => {
             style={{ textDecoration: 'none' }}
           >
             <Typography variant="h5" component="h1" gutterBottom>
-              Title: {job.title}
+              {job.title}
             </Typography>
             <Typography variant="body1" gutterBottom>
               Category: {job.category}
@@ -52,8 +74,29 @@ const JobCard = ({ job }) => {
               Salary: {job.salary}
             </Typography>
           </Link>
+          <IconButton
+            onClick={handleClickOpen}
+            sx={{ color: 'red', marginTop: 2 }}
+          >
+            <DeleteIcon />
+          </IconButton>
         </CardContent>
       </Card>
+
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Confirm Deletion</DialogTitle>
+        <DialogContent>
+          <Typography>Are you sure you want to delete this job?</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleDelete} color="secondary">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Grid>
   );
 };

@@ -1,114 +1,80 @@
-import React, { useState } from 'react';
-import { Modal, Button, TextField, Typography } from '@mui/material';
-import { usePostJob } from '../hooks/manager/useAddJob';
+import React from "react";
+import { Grid } from "@mui/material";
+import JobCard from "./card";
+import { useJobs } from "../hooks/manager/useGetHMjob";
+import PostJobModal from "./AddJob";
+import { useState } from "react";
+import { Button, Spinner } from "react-bootstrap";
 
-const PostJobModal = ({ open, onClose }) => {
-  const [jobData, setJobData] = useState({
-    title: '',
-    description: '',
-    location: '',
-    id: '',
-    category: '',
-    postDate: '',
-    salary: '',
-  });
+const Jobs = () => {
+  const { data: jobsData, isLoading, isError, error } = useJobs();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { mutate: postJob, isLoading, isError, error } = usePostJob();
-
-  const handleChange = (e) => {
-    setJobData({
-      ...jobData,
-      [e.target.name]: e.target.value,
-    });
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    postJob(jobData);
-    onClose(); // Close the modal after posting the job
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center">
+        <Spinner animation="border" variant="primary" />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return <h1>Error: {error.message}</h1>;
+  }
+
+  console.log(jobsData);
 
   return (
-    <Modal open={open} onClose={onClose} aria-labelledby="post-job-modal">
-      <div style={{ 
-        padding: '20px', 
-        backgroundColor: 'white', 
-        maxWidth: '500px', 
-        margin: 'auto', 
-        marginTop: '100px',
-        maxHeight: '90vh',
-        overflowY: 'auto',
-      }}>
-        <Typography variant="h6" component="h2" gutterBottom>
-          Post a New Job
-        </Typography>
-        <form onSubmit={handleSubmit}>
-          <TextField
-            fullWidth
-            margin="normal"
-            label="Job Title"
-            name="title"
-            value={jobData.title}
-            onChange={handleChange}
-            required
-          />
-          <TextField
-            fullWidth
-            margin="normal"
-            label="Job Description"
-            name="description"
-            value={jobData.description}
-            onChange={handleChange}
-            required
-            multiline
-            rows={4}
-          />
-          <TextField
-            fullWidth
-            margin="normal"
-            label="Job Location"
-            name="location"
-            value={jobData.location}
-            onChange={handleChange}
-            required
-          />
-          <TextField
-            fullWidth
-            margin="normal"
-            label="Category"
-            name="category"
-            value={jobData.category}
-            onChange={handleChange}
-            required
-          />
-          <TextField
-            fullWidth
-            margin="normal"
-            label="Post Date"
-            name="postDate"
-            type="date"
-            value={jobData.postDate}
-            onChange={handleChange}
-            required
-            InputLabelProps={{ shrink: true }}
-          />
-          <TextField
-            fullWidth
-            margin="normal"
-            label="Salary"
-            name="salary"
-            value={jobData.salary}
-            onChange={handleChange}
-            required
-          />
-          <Button type="submit" variant="contained" color="primary" disabled={isLoading} style={{ marginTop: '10px' }}>
-            {isLoading ? 'Posting...' : 'Post Job'}
-          </Button>
-          {isError && <p style={{ color: 'red' }}>Error: {error.message}</p>}
-        </form>
+    <>
+      <div
+        className="mt-3 mb-3"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        <h2>Jobs You Are Hiring For.....</h2>
       </div>
-    </Modal>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "20px",
+        }}
+      >
+        <Button variant="primary" onClick={handleOpenModal}>
+          Post a New Job
+        </Button>
+      </div>
+
+      {jobsData?.length === 0 ? (
+        <div style={{ textAlign: "center", marginTop: "20px" }}>
+          <h3>You aren't hiring for any jobs.</h3>
+        </div>
+      ) : (
+        <Grid
+          container
+          spacing={1}
+          sx={{
+            justifyContent: "center",
+            alignItems: "center",
+            marginBottom: "100px",
+          }}
+        >
+          {jobsData?.map((job) => (
+            <JobCard key={job._id} job={job} />
+          ))}
+        </Grid>
+      )}
+      <PostJobModal open={isModalOpen} onClose={handleCloseModal} />
+    </>
   );
 };
 
-export default PostJobModal;
+export default Jobs;
