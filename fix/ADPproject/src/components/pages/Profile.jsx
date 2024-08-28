@@ -7,11 +7,11 @@ const Profile = () => {
     const [userData, setUserData] = useState(undefined);
     const [loading, setLoading] = useState(true);
     const [haveProfile, setHaveProfile] = useState(false);
-    const [isEditing, setIsEditing] = useState(true);
     const [name, setName] = useState(userData?.name || " ");
     const [school, setSchool] = useState(userData?.school || " ");
     const [degree, setDegree] = useState(userData?.degree || " ");
     const [resume, setResume] = useState(userData?.resume || null);
+    const [resumeUrl, seetResumeUrl] = useState("")
     const [resumeFileName, setResumeFileName] = useState("Upload Resume (PDF)");
     const [reload, setReload] = useState(false);
     const { token } = useAuth();
@@ -26,6 +26,12 @@ const Profile = () => {
                     },
                 });
                 setUserData(data);
+
+                const byteArray = new Uint8Array(data.resume.data.data);
+                const blob = new Blob([byteArray], { type: data.resume.contentType });
+
+                const url = URL.createObjectURL(blob);
+                seetResumeUrl(url);
                 if (data.school !== undefined) {
                     setHaveProfile(true)
                     setName(data.name)
@@ -85,10 +91,10 @@ const Profile = () => {
     if (loading) {
         return <h1>Loading.....</h1>;
     }
-    
+
     return (
         <>
-            <div className="jobDetail page">
+            <div className="user-profile-page">
                 <div className="container">
                     {!haveProfile ? (
                         <form onSubmit={handleProfileUpdate} className="profile-form">
@@ -135,25 +141,29 @@ const Profile = () => {
                             </div>
                         </form>
                     ) : (
-                        <section className="jobDetail page">
-                            <div className="container">
+                        <div className="profiledetails container">
+                            <div className="banner ">
+                                
                                 <h3>Profile</h3>
-                                <div className="banner">
-                                <div className="profile-details">
-                                    <div className="detail">
-                                        <strong>Name:</strong> <span>{name}</span>
-                                    </div>
-                                    <div className="detail">
-                                        <strong>School:</strong> <span>{school}</span>
-                                    </div>
-                                    <div className="detail">
-                                        <strong>Degree:</strong> <span>{degree}</span>
-                                    </div>
-                                    <button className="update-button" onClick={() => setHaveProfile(false)}>Update Profile</button>
+                                <div className="detail">
+                                    <strong>Name:</strong> <span>{name}</span>
                                 </div>
+                                <div className="detail">
+                                    <strong>School:</strong> <span>{school}</span>
+                                </div>
+                                <div className="detail">
+                                    <strong>Degree:</strong> <span>{degree}</span>
+                                </div>
+                                <iframe
+                                    src={resumeUrl}
+                                    style={{ width: '100%', height: '400px' }}
+                                    title="PDF Viewer"
+                                ></iframe>
+                                <div className="makeCenter">
+                                <button className="update-button" onClick={() => setHaveProfile(false)}>Update Profile</button>
                                 </div>
                             </div>
-                        </section>
+                        </div>
                     )}
                 </div>
             </div>
