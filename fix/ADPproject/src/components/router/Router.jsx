@@ -8,6 +8,8 @@ import JobListpage from "../pages/JobListApplicant";
 import AuthRoute from "../context/route";
 import AppliedJobListApplicant from "../pages/AppliedJobListApplicant";
 import JobDetail from "../pages/JobDetail";
+import Profile from "../pages/Profile";
+
 
 
 const RouterApp = () => {
@@ -21,6 +23,7 @@ const RouterApp = () => {
         <Route path="/jobList" element={<AuthRoute element={JobListpage} />} />
         <Route path="/appliedjoblist" element={<AuthRoute element={AppliedJobListApplicant} />}/>
         <Route path="/jobdetails/:id" element={<AuthRoute element={JobDetail}/>}/>
+        <Route path="/profile" element={<AuthRoute element={Profile}/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
