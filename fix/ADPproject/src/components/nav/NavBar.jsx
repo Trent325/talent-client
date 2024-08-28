@@ -28,9 +28,17 @@ const AppNavbar = () => {
             {isLoggedIn ? (
               <>
                 {role === "applicant" && (
+                  <>
                   <Nav.Link as={Link} to="/jobList">
                     Job List
                   </Nav.Link>
+                  <Nav.Link as={Link} to="/appliedJobList">
+                    Applied Jobs
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/profile">
+                    Profile
+                  </Nav.Link>
+                  </>
                 )}
 
                 {/* Conditional links based on user role */}

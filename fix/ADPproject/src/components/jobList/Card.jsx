@@ -35,7 +35,7 @@ const JobCard = ({ job }) => {
         <CardContent
           sx={{ marginLeft: '50px', textAlign: 'left', color: 'black' }}
         >
-          <div onClick={() => navigate(`/jobdetails/${job._id}`, { state: job })}
+          <div onClick={() => navigate(`/jobdetailsapp/${job._id}`, { state: job })}
             style={{ textDecoration: 'none', cursor: 'pointer' }}>
             <Typography variant="h5" component="h1" gutterBottom>
               {job.title}

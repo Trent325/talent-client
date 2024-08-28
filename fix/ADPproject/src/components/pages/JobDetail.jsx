@@ -6,7 +6,7 @@ import {
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from '../context/auth';
-
+import { jwtDecode  } from 'jwt-decode';
 
 const JobDetail = () => {
     const { id } = useParams();
@@ -14,7 +14,7 @@ const JobDetail = () => {
     const { title, category, location, postDate, salary, description } = location2.state || {};
     const navigate = useNavigate();
     const { token } = useAuth();
-
+    const decoded = jwtDecode(token);
 
     useEffect(() => {
 
@@ -23,20 +23,18 @@ const JobDetail = () => {
     const ApplyFunction = async (applicantId,jobId) => {
         try {
 
-            console.log('@#######in apply function,',{applicantId:applicantId, jobId:jobId})
-            console.log(token)
+            const data = { "applicantId":applicantId, "jobId":jobId };
 
             const response = await fetch("http://localhost:3000/api/applicant/apply", {
                 method: "POST",
                 headers: {
-                    'Authorization': `Bearer ${token}`, // Include token in the header
+                    'Authorization': `Bearer ${token}`,
+                    "Content-Type": "application/json"
                 },                
-                body: JSON.stringify({ applicantId:applicantId, jobId:jobId }),
+                body: JSON.stringify(data),
               });
-
             if (response.ok) {
                 console.log("Sucess!!!!!")
-                clearForm();
                 setTimeout(() => { 
                     navigate("/jobList");
                 }, 500) 
@@ -114,7 +112,7 @@ const JobDetail = () => {
             )} */}
 
                         <Button variant="contained" onClick={() => { 
-                            ApplyFunction("66ce3121c8f7edf6cc323604",id);
+                            ApplyFunction(decoded.id,id);
                         }}>
                             Apply
                         </Button>
