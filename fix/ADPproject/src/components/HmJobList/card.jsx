@@ -1,28 +1,54 @@
 import React, { useState } from 'react';
-import { Card, CardContent, Grid, Typography, CardMedia, IconButton, Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
+import { Card, CardContent, Grid, Typography, CardMedia, IconButton, Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import { Link } from 'react-router-dom';
 import noImage from '../../assets/noimage.jpg';
 import { useDeleteJob } from '../hooks/manager/useDeleteJob';
+import { useUpdateJob } from '../hooks/manager/useUpdatejob';
 
 const JobCard = ({ job }) => {
-  const [open, setOpen] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [editedJob, setEditedJob] = useState({ ...job });
   const { mutate: deleteJob } = useDeleteJob();
+  const { mutate: updateJob } = useUpdateJob();
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleClickOpenDelete = () => {
+    setOpenDeleteModal(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleCloseDelete = () => {
+    setOpenDeleteModal(false);
+  };
+
+  const handleClickOpenEdit = () => {
+    setOpenEditModal(true);
+  };
+
+  const handleCloseEdit = () => {
+    setOpenEditModal(false);
   };
 
   const handleDelete = async () => {
     try {
       await deleteJob(job._id);
-      handleClose(); // Close the modal after deletion
+      handleCloseDelete(); // Close the modal after deletion
     } catch (error) {
       console.error('Failed to delete job:', error);
+    }
+  };
+
+  const handleChange = (e) => {
+    setEditedJob({ ...editedJob, [e.target.name]: e.target.value });
+  };
+
+  const handleEdit = async () => {
+    try {
+      await updateJob(editedJob);
+      handleCloseEdit(); // Close the modal after update
+    } catch (error) {
+      console.error('Failed to update job:', error);
     }
   };
 
@@ -75,7 +101,13 @@ const JobCard = ({ job }) => {
             </Typography>
           </Link>
           <IconButton
-            onClick={handleClickOpen}
+            onClick={handleClickOpenEdit}
+            sx={{ color: 'blue', marginTop: 2 }}
+          >
+            <EditIcon />
+          </IconButton>
+          <IconButton
+            onClick={handleClickOpenDelete}
             sx={{ color: 'red', marginTop: 2 }}
           >
             <DeleteIcon />
@@ -83,13 +115,79 @@ const JobCard = ({ job }) => {
         </CardContent>
       </Card>
 
-      <Dialog open={open} onClose={handleClose}>
+      {/* Edit Modal */}
+      <Dialog open={openEditModal} onClose={handleCloseEdit}>
+        <DialogTitle>Edit Job</DialogTitle>
+        <DialogContent>
+          <TextField
+            margin="dense"
+            label="Title"
+            name="title"
+            value={editedJob.title}
+            onChange={handleChange}
+            fullWidth
+          />
+          <TextField
+            margin="dense"
+            label="Description"
+            name="description"
+            value={editedJob.description}
+            onChange={handleChange}
+            fullWidth
+          />
+          <TextField
+            margin="dense"
+            label="Location"
+            name="location"
+            value={editedJob.location}
+            onChange={handleChange}
+            fullWidth
+          />
+          <TextField
+            margin="dense"
+            label="Salary"
+            name="salary"
+            value={editedJob.salary}
+            onChange={handleChange}
+            fullWidth
+          />
+          <TextField
+            margin="dense"
+            label="Category"
+            name="category"
+            value={editedJob.category}
+            onChange={handleChange}
+            fullWidth
+          />
+          <TextField
+            margin="dense"
+            label="Post Date"
+            name="postDate"
+            type="date"
+            InputLabelProps={{ shrink: true }}
+            value={editedJob.postDate}
+            onChange={handleChange}
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseEdit} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleEdit} color="primary">
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Delete Modal */}
+      <Dialog open={openDeleteModal} onClose={handleCloseDelete}>
         <DialogTitle>Confirm Deletion</DialogTitle>
         <DialogContent>
           <Typography>Are you sure you want to delete this job?</Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleCloseDelete} color="primary">
             Cancel
           </Button>
           <Button onClick={handleDelete} color="secondary">

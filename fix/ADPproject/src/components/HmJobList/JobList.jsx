@@ -30,8 +30,6 @@ const Jobs = () => {
     return <h1>Error: {error.message}</h1>;
   }
 
-  console.log(jobsData);
-
   return (
     <>
       <div
