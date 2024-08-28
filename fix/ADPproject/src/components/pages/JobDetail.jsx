@@ -1,51 +1,50 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-    Button
-} from "@mui/material";
+import { Button } from "@mui/material";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useAuth } from '../context/auth';
-import { jwtDecode  } from 'jwt-decode';
+import { useAuth } from "../context/auth";
+import { jwtDecode } from "jwt-decode";
 
 const JobDetail = () => {
-    const { id } = useParams();
-    const location2 = useLocation();
-    const { title, category, location, postDate, salary, description } = location2.state || {};
-    const navigate = useNavigate();
-    const { token } = useAuth();
-    const decoded = jwtDecode(token);
+  const { id } = useParams();
+  const location2 = useLocation();
+  const { title, category, location, postDate, salary, description } =
+    location2.state || {};
+  const navigate = useNavigate();
+  const { token } = useAuth();
+  const decoded = jwtDecode(token);
 
-    useEffect(() => {
+  useEffect(() => {}, []);
 
-    }, []);
+  const ApplyFunction = async (applicantId, jobId) => {
+    try {
+      const data = { applicantId: applicantId, jobId: jobId };
 
-    const ApplyFunction = async (applicantId,jobId) => {
-        try {
-
-            const data = { "applicantId":applicantId, "jobId":jobId };
-
-            const response = await fetch("http://localhost:3000/api/applicant/apply", {
-                method: "POST",
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                },                
-                body: JSON.stringify(data),
-              });
-            if (response.ok) {
-                console.log("Sucess!!!!!")
-                setTimeout(() => { 
-                    navigate("/jobList");
-                }, 500) 
-            } else {
-                const errorData = await response.json();
-                console.error('Error submitting form data:', errorData);
-            }
-        } catch (error) {
-            console.error('Error:', error);
+      const response = await fetch(
+        "http://localhost:3000/api/applicant/apply",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
         }
+      );
+      if (response.ok) {
+        console.log("Sucess!!!!!");
+        setTimeout(() => {
+          navigate("/jobList");
+        }, 500);
+      } else {
+        const errorData = await response.json();
+        console.error("Error submitting form data:", errorData);
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
+  };
 
     return (
         <section className="jobDetail page">
@@ -78,17 +77,19 @@ const JobDetail = () => {
                         }}
                     >
 
-                        <Button variant="contained" onClick={() => { 
-                            ApplyFunction(decoded.id,id);
-                        }}>
-                            Apply
-                        </Button>
-
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+            <Button
+              variant="contained"
+              onClick={() => {
+                ApplyFunction(decoded.id, id);
+              }}
+            >
+              Apply
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default JobDetail;
