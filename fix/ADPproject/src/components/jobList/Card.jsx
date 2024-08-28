@@ -2,8 +2,12 @@ import React from 'react';
 import { Card, CardContent, Grid, Typography, CardMedia } from '@mui/material';
 import { Link } from 'react-router-dom';
 import noImage from '../../assets/noimage.jpg';
+import { useNavigate } from 'react-router-dom';
+
 
 const JobCard = ({ job }) => {
+  const navigate = useNavigate();
+
   return (
     <Grid item xs={10} sm={10} md={10} lg={10} xl={10} key={job._id}>
       <Card
@@ -31,11 +35,8 @@ const JobCard = ({ job }) => {
         <CardContent
           sx={{ marginLeft: '50px', textAlign: 'left', color: 'black' }}
         >
-          <Link
-            className="Link-for-eventcard"
-            to={`/jobdetails/${job._id}`}
-            style={{ textDecoration: 'none' }}
-          >
+          <div onClick={() => navigate(`/jobdetails/${job._id}`, { state: job })}
+            style={{ textDecoration: 'none', cursor: 'pointer' }}>
             <Typography variant="h5" component="h1" gutterBottom>
               {job.title}
             </Typography>
@@ -51,7 +52,7 @@ const JobCard = ({ job }) => {
             <Typography variant="body1" gutterBottom>
               Salary: {job.salary}
             </Typography>
-          </Link>
+          </div>
         </CardContent>
       </Card>
     </Grid>

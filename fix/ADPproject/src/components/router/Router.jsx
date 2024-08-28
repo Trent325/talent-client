@@ -18,8 +18,6 @@ const RouterApp = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/jobList" element={<AuthRoute element={JobListpage} />} />
-        <Route path="/hiringManager" element={<AuthRoute element={Manager} />} />
-        <Route path="/jobdetails/:jobId" element={<AuthRoute element={JobDetails} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
