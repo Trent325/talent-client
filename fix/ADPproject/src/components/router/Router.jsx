@@ -9,8 +9,8 @@ import AuthRoute from "../context/route";
 import AppliedJobListApplicant from "../pages/AppliedJobListApplicant";
 import JobDetail from "../pages/JobDetail";
 import Profile from "../pages/Profile";
-
-
+import Manager from "../pages/JobListHiring";
+import JobDetails from "../pages/JobDetails";
 
 const RouterApp = () => {
   return (
@@ -21,9 +21,11 @@ const RouterApp = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/jobList" element={<AuthRoute element={JobListpage} />} />
-        <Route path="/appliedjoblist" element={<AuthRoute element={AppliedJobListApplicant} />}/>
-        <Route path="/jobdetails/:id" element={<AuthRoute element={JobDetail}/>}/>
-        <Route path="/profile" element={<AuthRoute element={Profile}/>}/>
+        <Route path="/appliedJobList" element={<AuthRoute element={AppliedJobListApplicant} />} />
+        <Route path="/profile" element={<AuthRoute element={Profile} />} />
+        <Route path="/hiringManager" element={<AuthRoute element={Manager} />} />
+        <Route path="/jobdetails/:jobId" element={<AuthRoute element={JobDetails} />} />
+        <Route path="/jobdetailsapp/:id" element={<AuthRoute element={JobDetail} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
