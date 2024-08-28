@@ -11,6 +11,7 @@ import JobDetail from "../pages/JobDetail";
 import Profile from "../pages/Profile";
 import Manager from "../pages/JobListHiring";
 import JobDetails from "../pages/JobDetails";
+import AdminDashboard from "../admin/AdminDashboard";
 
 const RouterApp = () => {
   return (
