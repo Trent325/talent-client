@@ -30,6 +30,13 @@ const RouterApp = () => {
 
         {/* Catch-All Route for 404 */}
         <Route path="*" element={<NotFound />} />
+        {/* Admin Routes */}
+        <Route
+          path="/admin-panel"
+          element={<AuthRoute element={AdminDashboard} />}
+        />
+
+        {/* Catch-All Route for 404 */}
       </Routes>
     </Router>
   );
