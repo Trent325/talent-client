@@ -3,7 +3,7 @@ import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth";
 
-const AppNavbar: React.FC = () => {
+const AppNavbar = () => {
   const navigate = useNavigate();
   const { token, role, setToken, setRole } = useAuth(); // Access the role from the auth context
   const isLoggedIn = Boolean(token);
@@ -27,11 +27,6 @@ const AppNavbar: React.FC = () => {
           <Nav className="mr-auto">
             {isLoggedIn ? (
               <>
-                {/* Common links for all logged-in users */}
-                <Nav.Link as={Link} to="/profile">
-                  Profile
-                </Nav.Link>
-
                 {role === "applicant" && (
                   <Nav.Link as={Link} to="/jobList">
                     Job List

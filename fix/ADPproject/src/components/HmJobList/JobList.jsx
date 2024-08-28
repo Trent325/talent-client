@@ -10,7 +10,6 @@ const Jobs = () => {
   const { data: jobsData, isLoading, isError, error } = useJobs();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
   console.log(jobsData)
   const handleOpenModal = () => {
     setIsModalOpen(true);

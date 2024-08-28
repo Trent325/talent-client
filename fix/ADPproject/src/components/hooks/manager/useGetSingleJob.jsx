@@ -20,7 +20,7 @@ const fetchJobById = async (jobId, token) => {
 export const useJobById = (jobId) => {
     const { token } = useAuth();
   
-    return useQuery(['job', jobId], () => fetchJobById(jobId, token), {
+    return useQuery(['job', jobId, 'details'], () => fetchJobById(jobId, token), {
       enabled: !!jobId, // Query will be enabled only if jobId is provided
     });
   };
