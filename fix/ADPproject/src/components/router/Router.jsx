@@ -17,16 +17,38 @@ const RouterApp = () => {
     <Router>
       <Navbar />
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        {/* Protected Routes */}
         <Route path="/jobList" element={<AuthRoute element={JobListpage} />} />
-        <Route path="/appliedJobList" element={<AuthRoute element={AppliedJobListApplicant} />} />
+        <Route
+          path="/appliedJobList"
+          element={<AuthRoute element={AppliedJobListApplicant} />}
+        />
         <Route path="/profile" element={<AuthRoute element={Profile} />} />
-        <Route path="/hiringManager" element={<AuthRoute element={Manager} />} />
-        <Route path="/jobdetails/:jobId" element={<AuthRoute element={JobDetails} />} />
-        <Route path="/jobdetailsapp/:id" element={<AuthRoute element={JobDetail} />} />
+        <Route
+          path="/hiringManager"
+          element={<AuthRoute element={Manager} />}
+        />
+        <Route
+          path="/jobdetails/:jobId"
+          element={<AuthRoute element={JobDetails} />}
+        />
+        <Route
+          path="/jobdetailsapp/:id"
+          element={<AuthRoute element={JobDetail} />}
+        />
         <Route path="*" element={<NotFound />} />
+        {/* Admin Routes */}
+        <Route
+          path="/admin-panel"
+          element={<AuthRoute element={AdminDashboard} />}
+        />
+
+        {/* Catch-All Route for 404 */}
       </Routes>
     </Router>
   );

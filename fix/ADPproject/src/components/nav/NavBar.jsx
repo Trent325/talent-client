@@ -3,6 +3,10 @@ import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth";
 
+// Import the new logo
+import adpLogo from "../../assets/ADP-logo.png"; // Adjust the path based on your folder structure
+import "./NavBar.css"; // Import CSS file for styling
+
 const AppNavbar = () => {
   const navigate = useNavigate();
   const { token, role, setToken, setRole } = useAuth(); // Access the role from the auth context
@@ -17,10 +21,15 @@ const AppNavbar = () => {
   };
 
   return (
-    <Navbar bg="primary" expand="lg">
+    <Navbar bg="primary" expand="lg" className="app-navbar">
       <Container>
-        <Navbar.Brand as={Link} to="/">
-          ADP
+        {/* Replace text with logo image */}
+        <Navbar.Brand as={Link} to="/" className="navbar-logo">
+          <img
+            src={adpLogo}
+            alt="ADP Logo"
+            className="logo" // Use a CSS class for logo styling
+          />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -29,15 +38,15 @@ const AppNavbar = () => {
               <>
                 {role === "applicant" && (
                   <>
-                  <Nav.Link as={Link} to="/jobList">
-                    Job List
-                  </Nav.Link>
-                  <Nav.Link as={Link} to="/appliedJobList">
-                    Applied Jobs
-                  </Nav.Link>
-                  <Nav.Link as={Link} to="/profile">
-                    Profile
-                  </Nav.Link>
+                    <Nav.Link as={Link} to="/jobList">
+                      Job List
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/appliedJobList">
+                      Applied Jobs
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/profile">
+                      Profile
+                    </Nav.Link>
                   </>
                 )}
 
@@ -47,16 +56,13 @@ const AppNavbar = () => {
                     <Nav.Link as={Link} to="/hiringManager">
                       Your Jobs
                     </Nav.Link>
-                    {/* Add more admin-specific links if needed */}
+                    {/* Add more hiring manager-specific links if needed */}
                   </>
                 )}
                 {role === "admin" && (
                   <>
                     <Nav.Link as={Link} to="/admin-panel">
                       Admin Panel
-                    </Nav.Link>
-                    <Nav.Link as={Link} to="/user-management">
-                      User Management
                     </Nav.Link>
                     {/* Add more admin-specific links if needed */}
                   </>
