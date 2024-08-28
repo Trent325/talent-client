@@ -27,6 +27,13 @@ const RouterApp = () => {
         {/* Protected Routes */}
         <Route path="/jobList" element={<AuthRoute element={JobListpage} />} />
         <Route path="*" element={<NotFound />} />
+        {/* Admin Routes */}
+        <Route
+          path="/admin-panel"
+          element={<AuthRoute element={AdminDashboard} />}
+        />
+
+        {/* Catch-All Route for 404 */}
       </Routes>
     </Router>
   );
