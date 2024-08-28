@@ -34,6 +34,9 @@ const AppNavbar: React.FC = () => {
                 <Nav.Link as={Link} to="/jobList">
                   Job List
                 </Nav.Link>
+                <Nav.Link as={Link} to="/appliedjoblist">
+                  Applied Jobs
+                </Nav.Link>
 
                 {/* Conditional links based on user role */}
                 {role === "hiringManager" && (
