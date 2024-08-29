@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import JobCard from "./card";
+import JobCard from "./Card";
 import { useJobs } from "../hooks/useGetJobs";
 import { Spinner } from "react-bootstrap";
 
